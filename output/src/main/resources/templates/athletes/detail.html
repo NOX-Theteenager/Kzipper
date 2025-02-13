@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Détails de l'Athlète</title>
+  <!-- Lien vers le CSS de Bootstrap -->
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+  <link rel="icon" type="image/x-icon" href="\logo.jpg">
+
+</head>
+<body>
+<div class="container my-4">
+  <h1 class="text-center mb-4">Détails de l'Athlète</h1>
+
+  <div class="card shadow-lg">
+    <div class="card-body">
+      <h2 class="card-title" th:text="${athlete.nom}">Nom de l'athlète</h2>
+      <p class="card-text">
+        <strong>Identifiant :</strong> <span th:text="${athlete.identifiant}">ID</span><br>
+        <strong>Date de naissance :</strong> <span th:text="${athlete.dateNaissance}">Date</span><br>
+        <strong>Coach :</strong>
+        <span th:text="${athlete.coach?.nom ?: 'Aucun'}">Nom du coach</span><br>
+        <strong>Performances :</strong>
+        <span th:if="${#lists.isEmpty(athlete.performances)}">Aucune performance enregistrée</span>
+      <ul th:if="${!#lists.isEmpty(athlete.performances)}">
+        <li th:each="perf : ${athlete.performances}" th:text="${perf.details}">Performance</li>
+      </ul>
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <a href="/athletes" class="btn btn-secondary">Retour à la liste</a>
+    <a th:href="@{'/athletes/' + ${athlete.id} + '/edit'}" class="btn btn-primary">Modifier</a>
+    <form th:action="@{'/athletes/' + ${athlete.id} + '/delete'}" method="post" class="d-inline">
+      <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet athlète ?')">Supprimer</button>
+    </form>
+  </div>
+</div>
+
+<!-- Lien vers le JS de Bootstrap -->
+<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

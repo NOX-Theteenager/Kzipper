@@ -1,0 +1,44 @@
+<aside th:fragment="sidebar_athlete" class="sidebar bg-dark text-white border-right"
+       xmlns:th="http://www.w3.org/1999/xhtml">
+  <div class="sidebar-header text-center py-4">
+    <h4>Bienvenue <span th:text="${athlete.nom}"></span></h4>
+  </div>
+  <ul class="nav flex-column">
+    <!-- Dashboard -->
+    <li class="nav-item">
+      <a href="/athletes/dashboard" class="nav-link text-white active">
+        <i class="bi bi-speedometer2"></i> Tableau de bord
+      </a>
+    </li>
+
+    <!-- Voir les objectifs -->
+    <li class="nav-item">
+      <a href="/athletes/objectifs" class="nav-link text-white" th:classappend="${activePage == 'objectifs' ? 'active' : ''}">
+        <i class="bi bi-flag"></i> Mes Objectifs
+        <span class="badge bg-primary float-end" th:text="${#lists.size(objectifs)}"></span>
+      </a>
+    </li>
+
+    <!-- Modifier les informations personnelles -->
+    <li class="nav-item">
+      <a href="/athletes/edit" class="nav-link text-white">
+        <i class="bi bi-person"></i> Modifier Mon Profil
+      </a>
+    </li>
+
+    <!-- Voir les performances -->
+    <li class="nav-item">
+      <a href="/athletes/performances" class="nav-link text-white">
+        <i class="bi bi-bar-chart"></i> Mes Performances
+        <span class="badge bg-success float-end" th:text="${#lists.size(performances)}"></span>
+      </a>
+    </li>
+
+    <!-- Se déconnecter -->
+    <li class="nav-item mt-4">
+      <a href="/logout" class="nav-link text-danger">
+        <i class="bi bi-box-arrow-right"></i> Se Déconnecter
+      </a>
+    </li>
+  </ul>
+</aside>

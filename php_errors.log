@@ -1,0 +1,15 @@
+[05-Dec-2024 21:24:03 UTC] PHP Warning:  foreach() argument must be of type array|object, string given in E:\B2\semestre_1\php\Kzipper\test\test_script.php on line 35
+[08-Dec-2024 12:51:17 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type RecursiveIteratorIterator as array in E:\B2\semestre_1\php\Kzipper\decompress.php:145
+Stack trace:
+#0 {main}
+  thrown in E:\B2\semestre_1\php\Kzipper\decompress.php on line 145
+[08-Dec-2024 12:51:35 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type RecursiveIteratorIterator as array in E:\B2\semestre_1\php\Kzipper\decompress.php:145
+Stack trace:
+#0 {main}
+  thrown in E:\B2\semestre_1\php\Kzipper\decompress.php on line 145
+[08-Dec-2024 12:52:14 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type RecursiveIteratorIterator as array in E:\B2\semestre_1\php\Kzipper\decompress.php:145
+Stack trace:
+#0 {main}
+  thrown in E:\B2\semestre_1\php\Kzipper\decompress.php on line 145
+[08-Dec-2024 18:35:24 UTC] PHP Warning:  mkdir(): No such file or directory in E:\B2\semestre_1\php\Kzipper (4)\Kzipper\src\CompressorManager.php on line 172
+[08-Dec-2024 18:35:24 UTC] PHP Warning:  file_put_contents(E:\B2\semestre_1\php\Kzipper (4)\Kzipper/output/\E:\B2\semestre_1\php\Kzipper (4)\Kzipper/uploads/main/resources/application.properties): Failed to open stream: No such file or directory in E:\B2\semestre_1\php\Kzipper (4)\Kzipper\src\HuffmanCompressor.php on line 86

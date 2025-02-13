@@ -1,0 +1,372 @@
+    /* body {
+      background: #f4f4f4;
+      font-family: Arial, sans-serif;
+    } */
+/* animation en arrière plan bon je pense que nous pouvons changer les couleurs */
+body {
+  background: linear-gradient(-45deg, #007bff, #f9fb98, #f4f4f4, #ff7f50);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* fin animation */
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #007bff, #09c052);
+      padding: 0.5rem 1rem;
+      color: white;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .header-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .header-btn {
+      background: white;
+      color: #007bff;
+      border: none;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .header-btn:hover {
+      background: #0056b3;
+      color: white;
+    }
+
+    .main-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 2rem 0;
+    }
+
+    .image-container,
+    .upload-card,
+    .file-and-animation {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    .image-container {
+      width: 40%;
+      text-align: center;
+      padding: 1rem;
+      animation-delay: 0.3s;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-text {
+      margin-top: 1rem;
+      font-style: italic;
+      color: #555;
+    }
+
+    .upload-card {
+      width: 55%;
+      padding: 2rem;
+      background: transparent;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      animation-delay: 0.5s;
+    }
+
+     .upload-zone {
+      border: 2px dashed #007bff;
+      border-radius: 8px;
+      text-align: center;
+      padding: 3rem 1rem;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .upload-zone:hover {
+      background-color: transparent;
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.5); /*possible de retire cette couleur de fond de la zone*/
+    } 
+
+    /* .upload-zone {
+      border: 2px dashed #007bff;
+      border-radius: 8px;
+      text-align: center;
+      padding: 3rem 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.upload-zone:hover, .drag-over {
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.5);
+} */
+
+    .upload-zone input[type="file"] {
+      display: none;
+    }
+
+    .file-and-animation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      animation-delay: 0.7s;
+    }
+
+    .file-container {
+      width: 75%;
+      display: none;
+      background: transparent;
+      /* border: 1px solid #ddd; 
+      border-radius: 8px;*/
+      padding: 1rem;
+      margin: 1rem auto; /* Centrer horizontalement */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .file-container h4 {
+      margin-bottom: 1rem;
+      color: #007bff;
+    }
+
+    .file-list {
+      display: flex;
+      flex-direction: column; /* Organise chaque fichier en colonne */
+      gap: 1rem; /* Espacement entre les lignes */
+    }
+    
+    .file-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem;
+      border: 1px solid #eee;
+      border-radius: 5px;
+      background: #f9f9f9; /* Couleur de fond pour chaque fichier */
+    }
+    
+    .file-list span {
+      flex: 1; /* Permet au nom du fichier de prendre toute la place disponible */
+      margin-right: 1rem;
+      font-size: 0.95rem;
+      color: #333;
+    }
+    
+    .file-list a,
+    .file-list button {
+      padding: 0.4rem 0.8rem;
+      background: transparent;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease;
+    }
+    
+    .file-list a {
+      color: green; /* Couleur par défaut pour Télécharger */
+    }
+    
+    .file-list a:hover {
+      color: white;
+      background: green;
+      transform: scale(1.05);
+    }
+    
+    .file-list button {
+      color: red; /* Couleur par défaut pour Supprimer */
+    }
+    
+    .file-list button:hover {
+      color: white;
+      background: red;
+      transform: scale(1.05);
+    }
+    
+
+    .animation {
+      display: none; /* Masque l'élément au chargement */
+      width: 250px;
+      height: 150px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .image-container {
+        display: none;
+      }
+
+      .upload-card {
+        width: 100%;
+      }
+
+      .file-and-animation {
+        flex-direction: column;
+        animation-delay: 0.9s;
+      }
+    }
+    .drag-over {
+  background-color: #eaf6ff;
+  border-color: #007bff;
+}
+
+.upload-zone {
+  border: 2px dashed #6c757d;
+  background-color: #f8f9fa;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.upload-zone.drag-over {
+  background-color: #e9ecef;
+  border-color: #007bff;
+}
+
+/* Bouton rond */
+/* Conteneur du bouton */
+.btn-clear-container {
+  position: relative; /* Position relative à son conteneur parent */
+  margin-top: 5px; /* Espacement en dessous du texte */
+  display: inline-block; /* Empêche le conteneur de prendre toute la largeur */
+  text-align: left; /* Aligner à gauche */
+}
+
+/* Bouton transparent */
+.btn-clear-cache {
+  width: 30px; /* Taille réduite */
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Image à l'intérieur du bouton */
+.clear-icon {
+  width: 100%; /* L'image remplit entièrement le bouton */
+  height: 100%;
+  object-fit: cover; /* Garde les proportions de l'image */
+  border-radius: 50%; /* Rendre l'image circulaire */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effet de survol sur le bouton */
+.btn-clear-cache:hover .clear-icon {
+  transform: scale(1.1); /* Agrandissement léger au survol */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Ombre pour l'accentuer */
+}
+
+/* Tooltip */
+.tooltip-text {
+  visibility: hidden;
+  position: absolute;
+  top: 40px; /* Ajustez selon l'emplacement */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 11;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Afficher l'info-bulle au survol */
+.btn-clear-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+/* Fin vider le cache */
+
+/* Debut progress bar */
+.progress-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.progress {
+  height: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #4caf50, #2f7d32);
+  transition: width 0.4s ease;
+  height: 100%;
+  line-height: 20px;
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+/* Fin progress bar */
+
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, #007bff, #09c052);
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

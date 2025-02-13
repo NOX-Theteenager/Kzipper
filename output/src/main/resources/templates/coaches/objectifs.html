@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="\logo.jpg">
+
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha384-someHashHere" crossorigin="anonymous">
+
+    <style>
+        body {
+          display: flex;
+          min-height: 100vh;
+          flex-direction: column;
+          margin: 0;
+        }
+        .sidebar {
+          height: 100vh;
+          background-color: #343a40;
+          color: white;
+          position: fixed;
+          width: 300px;
+        }
+        .sidebar a {
+          color: white;
+          text-decoration: none;
+        }
+        .sidebar a:hover {
+          background-color: #495057;
+        }
+        .sidebar .nav-link.active {
+          background-color: #495057;
+          font-weight: bold;
+        }
+        .content {
+          margin-left: 300px;
+          padding: 20px;
+          flex: 1;
+        }
+    </style>
+
+</head>
+
+<body>
+<div th:insert="fragments/sidebar :: sidebar" th:with="activePage='objectifs'"></div>
+
+<div class="content">
+    <div class="container mt-5">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-primary">Gestion des Objectifs</h1>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addObjectiveModal">
+                <i class="fa fa-plus"></i> Ajouter un Objectif
+            </button>
+        </div>
+
+        <!-- Liste des Objectifs -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Échéance</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Dynamically load objectives with Thymeleaf or JS -->
+                    <tr th:each="objectif, stat : ${objectifs}">
+                        <td th:text="${stat.index + 1}">1</td>
+                        <td th:text="${objectif.titre}">Exemple Titre</td>
+                        <td th:text="${objectif.description}">Exemple Description</td>
+                        <td th:text="${objectif.dateEcheance}">2024-11-30</td>
+                        <td>
+                            <!-- Modifier -->
+                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                    th:attr="data-bs-target='#editObjectiveModal-' + ${objectif.id}">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <!-- Supprimer -->
+                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    th:attr="data-bs-target='#deleteObjectiveModal-' + ${objectif.id}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale: Ajouter un Objectif -->
+    <div class="modal fade" id="addObjectiveModal" tabindex="-1" aria-labelledby="addObjectiveModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{/coaches/objectifs/create}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addObjectiveModalLabel">Ajouter un Objectif</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="titre" class="form-label">Titre</label>
+                            <input type="text" id="titre" name="titre" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea id="description" name="description" class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dateEcheance" class="form-label">Échéance</label>
+                            <input type="date" id="dateEcheance" name="dateEcheance" class="form-control" required>
+                        </div>
+
+                        <script>
+                            // JavaScript pour définir la date minimale sur aujourd'hui
+                            document.getElementById('dateEcheance-edit').setAttribute('min', new Date().toISOString().split('T')[0]);
+                        </script>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-success">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale: Modifier un Objectif -->
+    <div th:each="objectif : ${objectifs}" th:id="'editObjectiveModal-' + ${objectif.id}" class="modal fade" tabindex="-1"
+         aria-labelledby="editObjectiveModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{/coaches/objectifs/{id}/update(id=${objectif.id})}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editObjectiveModalLabel">Modifier l'Objectif</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="titre" class="form-label">Titre</label>
+                            <input type="text" id="titre-edit" name="titre" class="form-control" th:value="${objectif.titre}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea id="description-edit" name="description" class="form-control" rows="3" th:text="${objectif.description}" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dateEcheance-edit" class="form-label">Échéance</label>
+                            <input type="date" id="dateEcheance-edit" name="dateEcheance" class="form-control" th:value="${objectif.dateEcheance}" required>
+                        </div>
+
+                        <script>
+                            // JavaScript pour définir la date minimale sur aujourd'hui
+                            document.getElementById('dateEcheance-edit').setAttribute('min', new Date().toISOString().split('T')[0]);
+                        </script>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-warning">Modifier</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale: Supprimer un Objectif -->
+    <div th:each="objectif : ${objectifs}" th:id="'deleteObjectiveModal-' + ${objectif.id}" class="modal fade" tabindex="-1"
+         aria-labelledby="deleteObjectiveModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{/coaches/objectifs/{id}/delete(id=${objectif.id})}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteObjectiveModalLabel">Supprimer l'Objectif</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Êtes-vous sûr de vouloir supprimer cet objectif ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap JS -->
+<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

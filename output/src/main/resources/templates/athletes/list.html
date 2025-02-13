@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Liste des Athlètes</title>
+  <!-- Lien vers le CSS de Bootstrap -->
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+  <link rel="icon" type="image/x-icon" href="\logo.jpg">
+
+</head>
+<body>
+<div class="container my-4">
+  <h1 class="text-center mb-4">Liste des Athlètes</h1>
+  <div class="row">
+    <!-- Boucle Thymeleaf pour afficher les athlètes -->
+    <div class="col-md-4 mb-3" th:each="athlete : ${athletes}">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${athlete.nom}">Nom de l'athlète</h5>
+          <p class="card-text">
+            <strong>Identifiant :</strong> <span th:text="${athlete.identifiant}">ID</span><br>
+            <strong>Date de naissance :</strong> <span th:text="${athlete.dateNaissance}">Date</span><br>
+            <strong>Coach :</strong>
+            <span th:text="${athlete.coach?.nom ?: 'Aucun'}">Nom du coach</span>
+          </p>
+          <a th:href="@{'/athletes/' + ${athlete.id}}" class="btn btn-primary btn-sm">Voir Détails</a>
+          <a th:href="@{'/athletes/' + ${athlete.id} + '/edit'}" class="btn btn-secondary btn-sm">Modifier</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lien vers le JS de Bootstrap -->
+<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

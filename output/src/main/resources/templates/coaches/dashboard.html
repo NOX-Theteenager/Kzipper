@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="\logo.jpg">
+
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden; /* Évite les débordements horizontaux */
+    }
+    .sidebar {
+      height: 100vh;
+      background-color: #343a40;
+      color: white;
+      position: fixed;
+      width: 300px;
+    }
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      display: block;
+    }
+    .sidebar a:hover {
+      background-color: #495057;
+    }
+    .sidebar .nav-link.active {
+      background-color: #495057;
+      font-weight: bold;
+    }
+    .content {
+      margin-left: 300px; /* Correspond à la largeur de la sidebar */
+      padding: 20px;
+      flex: 1;
+    }
+  </style>
+  </head>
+
+<body>
+<!-- Insertion de la sidebar -->
+<div th:replace="~{fragments/sidebar :: sidebar}" th:with="activePage='dashboard'"></div>
+
+<!-- Contenu principal -->
+<div class="content">
+  <div class="container mt-4">
+    <h1 class="mb-4">Bienvenue, <span th:text="${coach.nom}"></span>!</h1>
+
+    <!-- Statistiques -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header">Athlètes</div>
+          <div class="card-body">
+            <h5 class="card-title" th:text="${athletes.size()}">0</h5>
+            <p class="card-text">Athlètes sous votre supervision.</p>
+            <a href="/coaches/athletes" class="btn btn-light">Voir la liste</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card text-white bg-success mb-3">
+          <div class="card-header">Objectifs</div>
+          <div class="card-body">
+            <h5 class="card-title" th:text="${objectifs.size()}">0</h5>
+            <p class="card-text">Objectifs définis pour vos athlètes.</p>
+            <a href="/coaches/objectifs" class="btn btn-light">Gérer les objectifs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Objectifs récents -->
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <h3>Vos Objectifs Récents</h3>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Date</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="objectif : ${objectifs}">
+            <td th:text="${objectif.id}"></td>
+            <td th:text="${objectif.titre}"></td>
+            <td th:text="${objectif.description}"></td>
+            <td th:text="${objectif.dateEcheance}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+
+
+  <style>
+    /* Styles pour la sidebar */
+    .sidebar {
+        background: linear-gradient(135deg, #ff5722, #c2185b);
+        color: #fff;
+        height: 100vh;
+        padding: 20px;
+        transition: all 0.3s ease-in-out; /* Animation douce pour les transitions */
+        box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2); /* Ombre pour la sidebar */
+    }
+
+    .sidebar h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+        color: #ccc;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s; /* Effet de transition */
+    }
+
+    .nav-link:hover {
+        background-color: #ff5722; /* Couleur de fond au survol */
+        color: #fff; /* Texte blanc au survol */
+    }
+
+    .nav-link.active {
+        background-color: #ff5722; /* Couleur active */
+        color: #fff; /* Texte blanc */
+    }
+
+    .nav-link i {
+        margin-right: 10px; /* Espacement entre l'icône et le texte */
+    }
+
+    .nav-item {
+        margin-bottom: 10px;
+    }
+
+    /* Animation pour le dégradé de fond */
+    @keyframes gradient {
+        0% {
+            background-position: 100% 50%;
+        }
+        50% {
+            background-position: 0% 50%;
+        }
+        100% {
+            background-position: 100% 50%;
+        }
+    }
+
+    .sidebar {
+        background-size: 400% 400%;
+        animation: gradient 5s ease infinite;
+    }
+
+    /* Style pour les icônes */
+    .bi {
+        font-size: 1.2rem; /* Taille de l'icône */
+    }
+  </style>
+</head>
+<body>
+
+<div th:fragment="sidebar" class="sidebar d-flex flex-column p-3">
+  <h2 class="mb-4">Sports Tracker</h2>
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link" th:classappend="${activePage == 'dashboard' ? 'active' : ''}" href="/coaches/dashboard">
+        <i class="bi bi-speedometer2"></i> Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:classappend="${activePage == 'athletes' ? 'active' : ''}" href="/coaches/athletes">
+        <i class="bi bi-people-fill"></i> Mes Athlètes
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:classappend="${activePage == 'objectifs' ? 'active' : ''}" href="/coaches/objectifs">
+        <i class="bi bi-flag"></i> Objectifs
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:classappend="${activePage == 'edit' ? 'active' : ''}" href="/coaches/edit">
+        <i class="bi bi-pen-fill"></i> Modifier mes informations
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/logout">
+        <i class="bi bi-box-arrow-right"></i> Déconnexion
+      </a>
+    </li>
+  </ul>
+</div>
+

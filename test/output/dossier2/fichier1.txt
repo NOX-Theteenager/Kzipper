@@ -1,0 +1,1 @@
+Texte avec des répétitions : ABCABCABCABC.

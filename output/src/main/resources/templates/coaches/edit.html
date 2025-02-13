@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modifier Coach</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="\logo.jpg">
+
+
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden; /* Évite les débordements horizontaux */
+    }
+    .sidebar {
+      height: 100vh;
+      background-color: #343a40;
+      color: white;
+      position: fixed;
+      width: 300px;
+    }
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      display: block;
+    }
+    .sidebar a:hover {
+      background-color: #495057;
+    }
+    .sidebar .nav-link.active {
+      background-color: #495057;
+      font-weight: bold;
+    }
+    .content {
+      margin-left: 300px; /* Correspond à la largeur de la sidebar */
+      padding: 20px;
+      flex: 1;
+    }
+  </style>
+
+</head>
+<body>
+
+<div th:insert="fragments/sidebar :: sidebar" th:with="activePage='edit'"></div>
+
+<div class="content">
+</div>
+<div class="container mt-4">
+  <h1 class="mb-4">Modifier les informations du Coach</h1>
+  <p th:text="${error}"></p>
+  <form th:action="@{/coaches/update}" th:object="${coach}" method="post">
+    <!-- ID caché -->
+    <input type="hidden" th:field="*{id}"/>
+
+    <!-- Nom -->
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nom</label>
+      <input type="text" id="nom" class="form-control" th:field="*{nom}" placeholder="Nom du coach" required>
+    </div>
+
+    <!-- identifiant -->
+    <div class="mb-3">
+      <label for="identifiant" class="form-label">identifiant</label>
+      <input name="identifiant" type="text" id="identifiant" class="form-control" th:field="*{identifiant}" placeholder="username du coach" required>
+    </div>
+
+    <!-- Spécialité -->
+    <div class="mb-3">
+      <label for="specialite" class="form-label">Spécialité</label>
+      <input type="text" id="specialite" class="form-control" th:field="*{specialite}" placeholder="Spécialité du coach" required>
+    </div>
+
+    <!-- Bouton de soumission -->
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+      <a href="/coaches/dashboard" class="btn btn-secondary">Annuler</a>
+    </div>
+  </form>
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

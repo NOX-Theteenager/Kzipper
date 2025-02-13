@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil - Plateforme de Gestion Athlètes et Entraîneurs</title>
+  <!-- Polices Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Bibliothèques CSS -->
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/styleHome.css}">
+  <link rel="icon" type="image/x-icon" href="\logo.jpg">
+
+</head>
+
+<div th:insert="fragments/header :: header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+
+<!-- Section Héro -->
+<section class="hero-section">
+  <div class="content">
+    <h2>Rejoignez notre communauté sportive</h2>
+    <p>Que vous soyez athlète ou coach, notre plateforme vous aide à gérer vos objectifs et suivre vos performances.</p>
+    <button onclick="window.location.href = '/auth/signup'">Inscrivez-vous dès maintenant</button>
+  </div>
+</section>
+
+<!-- Section Footer -->
+<footer>
+  <p>&copy; 2024 Sport Manager. Tous droits réservés.</p>
+</footer>
+
+<!-- Intégration de Three.js -->
+</body>
+</html>
